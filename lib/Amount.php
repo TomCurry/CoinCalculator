@@ -13,5 +13,39 @@ namespace Coin\lib;
  */
 class Amount 
 {
-    //put your code here
+        private $coins = [
+                [   
+                    'coin' => '1p',
+                    'amount'=> 1
+                ],
+                [   
+                    'coin' =>  '2p',
+                    'amount' => 2
+                ],
+                [   
+                    'coin' => '20p', 
+                    'amount' => 20
+                ],
+                [   
+                    'coin' => '50p', 
+                    'amount' => 50
+                ],
+                [
+                    'coin' => '£1',
+                    'amount' => 100
+                ],
+                [   
+                    'coin' => '£2', 
+                    'amount' => 200
+                ]
+            ];
+        
+            private $currency;
+            
+            
+            
+            public function __construct($currency) {
+                $this->currency = $currency;
+            }
+
 }

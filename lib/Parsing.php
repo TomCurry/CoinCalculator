@@ -11,10 +11,13 @@ namespace Coin\lib;
  *
  * @author tom
  */
-class Parsing 
-{
+class Parsing {
     
-
-
+    public function currencyToNumb() {
+        $fmt = new NumberFormatter('de_DE', NumberFormatter::CURRENCY);
+        $num = "£1.23";
+        
+        echo "We have ".$fmt->parseCurrency($num, $currency)." in $currency\n";  
+}
 
 }
