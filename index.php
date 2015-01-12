@@ -18,3 +18,8 @@ and open the template in the editor.
         </form>
     </body>
 </html>
+<?php
+
+require "vendor/autoload.php";
+$currency = new Coin\lib\Currencies\GBP;
+$amount = new Coin\lib\Amount($currency);

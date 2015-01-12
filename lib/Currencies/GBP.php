@@ -1,17 +1,22 @@
 <?php
 namespace Coin\lib\Currencies;
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+use Coin\lib\Currencies\CurrencyInterface;
 
 /**
  * Description of GBP
  *
  * @author tom
  */
-class GBP {
+class GBP implements CurrencyInterface {
     
+    private $majorSign = "£";
+    private $minorSign = "p";
+    
+    public function getTotalinDecimal($total) {
+        //check for £ sign
+            //multiply pounds by 100 and add to number of pence
+        //if not £ sign work out number of pence
+        //check if theres a dot
+    }
     
 }

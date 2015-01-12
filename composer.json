@@ -1,0 +1,16 @@
+{
+    "name": "tomcurry/coin-calculator",
+    "description": "An application that calculates what coins go into an entered value",
+    "authors": [
+        {
+            "name": "Tom Curry",
+            "email": "tcurry@ukwebmedia.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Coin\\lib\\": "lib"
+        }
+    }
+}

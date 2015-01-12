@@ -13,7 +13,7 @@ namespace Coin\lib;
  */
 class Amount 
 {
-        private $coins = [
+    private $coins = [
                 [   
                     'coin' => '1p',
                     'amount'=> 1
@@ -41,11 +41,12 @@ class Amount
             ];
         
             private $currency;
-            
-            
-            
+           
             public function __construct($currency) {
                 $this->currency = $currency;
             }
-
+            
+            public function findCoinAmount($total, $coin) {
+                return $this->currency->getTotalinDecimal($total);
+            }
 }
