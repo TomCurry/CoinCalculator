@@ -26,7 +26,7 @@ $amount = new Coin\lib\Amount($currency);
 if (isset($_POST['number'])) {
     $value = $_POST['number'];
     
-    $validation = new Coin\lib\Validation;
+    $validation = new Coin\lib\Validation($currency);
     $validation->numeric($value);
     $validation->isEmpty($value);
     $validation->nonNumericCharacter($value);

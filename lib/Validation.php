@@ -14,7 +14,16 @@ namespace Coin\lib;
 class Validation
 {
     private $validationErrors = [];
+    /**
+     *
+     * @var Coin\lib\Currencies\GBP $currency
+     */
+    private $currency;
     
+    public function __construct($currency) {
+        $this->currency = $currency;
+    }
+
     public function isEmpty($empty) {
         //check if input is an empty string
         if (!empty($empty)) {
@@ -25,7 +34,10 @@ class Validation
     }
     
     public function nonNumericCharacter($subject) {
-        $data = preg_match('/[^£0-9p.]+/i', $subject);
+        $pattern = '/[^%s0-9%s%s]+/i';
+        $pattern = sprintf($pattern, $this->currency->getMajorSign(), $this->currency->getMinorSign(), $this->currency->getDivider());
+        $data = preg_match($pattern, $subject);
+        
         if (!$data) {
             return true;
         }
