@@ -19,7 +19,21 @@ and open the template in the editor.
     </body>
 </html>
 <?php
-
+var_dump($_POST);
 require "vendor/autoload.php";
 $currency = new Coin\lib\Currencies\GBP;
 $amount = new Coin\lib\Amount($currency);
+if (isset($_POST['number'])) {
+    $value = $_POST['number'];
+    
+    $validation = new Coin\lib\Validation;
+    $validation->numeric($value);
+    $validation->isEmpty($value);
+    $validation->nonNumericCharacter($value);
+    
+    if (!empty($validation->getErrors())){
+        var_dump($validation->getErrors());
+    } else {
+        echo $amount->findCoinAmount($value);
+    }
+}

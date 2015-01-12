@@ -13,24 +13,41 @@ namespace Coin\lib;
  */
 class Validation
 {
-
-    public function emptyString($empty) {
+    private $validationErrors = [];
+    
+    public function isEmpty($empty) {
         //check if input is an empty string
-        if (!isset($empty)) {
-            echo "Please enter a valid amount!";
+        if (!empty($empty)) {
+            return true;
         }
-        return $empty;
+        $this->addError("Please enter something!");
+        return false;
     }
     
-    public function nonNumericCharacter() {
-        //
+    public function nonNumericCharacter($subject) {
+        $data = preg_match('/[^£0-9p.]+/i', $subject);
+        if (!$data) {
+            return true;
+        }
+        $this->addError("Please enter a valid amount!");
+        return false;
     }
     
-    public function missingDigits($digit) {
+    public function numeric($digit) {
         //check if a number has been entered
-        if (!is_numeric($digit)) {
-            echo "Please enter a valid amount!";
-        }
-        return $digit;
+        $data = preg_replace('/[£p]/i', "", $digit);
+        if (is_numeric($data)) {
+            return true;
+        } 
+        $this->addError("Please enter money!");
+        return false;
+    }
+    
+    protected function addError($message) {
+        $this->validationErrors[] = $message;
+    }
+    
+    public function getErrors() {
+        return $this->validationErrors;
     }
 }

@@ -46,7 +46,7 @@ class Amount
                 $this->currency = $currency;
             }
             
-            public function findCoinAmount($total, $coin) {
+            public function findCoinAmount($total) {
                 return $this->currency->getTotalinDecimal($total);
             }
 }

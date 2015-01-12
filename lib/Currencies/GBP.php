@@ -13,7 +13,8 @@ class GBP implements CurrencyInterface {
     private $minorSign = "p";
     
     public function getTotalinDecimal($total) {
-        //check for £ sign
+        return "biscuits";
+//check for £ sign
             //multiply pounds by 100 and add to number of pence
         //if not £ sign work out number of pence
         //check if theres a dot
