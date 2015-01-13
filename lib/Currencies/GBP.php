@@ -14,11 +14,10 @@ class GBP implements CurrencyInterface {
     private $divider = ".";
     
     public function getTotalinDecimal($total) {
-        return "biscuits";
-        //check for £ sign
-            //multiply pounds by 100 and add to number of pence
-        //if not £ sign work out number of pence
-        //check if theres a dot
+        var_dump(explode(".", $total));
+        $stripped = str_replace($this->divider, "", $total);
+        return $stripped;
+        
     }
     
     public function getMajorSign() {
