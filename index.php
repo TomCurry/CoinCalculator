@@ -34,6 +34,6 @@ if (isset($_POST['number'])) {
     if (!empty($validation->getErrors())){
         var_dump($validation->getErrors());
     } else {
-        echo $amount->findCoinAmount($value);
+        var_dump($amount->findCoinAmount($value));
     }
 }

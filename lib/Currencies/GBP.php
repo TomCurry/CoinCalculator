@@ -13,6 +13,45 @@ class GBP implements CurrencyInterface {
     private $minorSign = "p";
     private $divider = ".";
     
+    private $coins = [
+        [
+            'coin' => '1p',
+            'amount' => 1
+        ],
+        [
+            'coin' => '2p',
+            'amount' => 2
+        ],
+        [
+            'coin' => '20p',
+            'amount' => 20
+        ],
+        [
+            'coin' => '50p',
+            'amount' => 50
+        ],
+        [
+            'coin' => '£1',
+            'amount' => 100
+        ],
+        [
+            'coin' => '£2',
+            'amount' => 200
+        ]
+    ];
+    
+    public function __construct() {
+        usort($this->coins, function($a, $b){
+            if ($a['amount'] == $b['amount']) {
+                return 0;
+            } elseif ($a['amount'] < $b['amount']) {
+                return -1;
+            } else {
+                return 1;
+            }
+        });
+    }
+    
     public function getTotalinDecimal($total) {
         var_dump(explode(".", $total));
         $stripped = str_replace([$this->majorSign, $this->minorSign], "", $total);
@@ -41,4 +80,7 @@ class GBP implements CurrencyInterface {
         return $this->divider;
     }
     
+    public function getCoins() {
+        return $this->coins;
+    }    
 }

@@ -15,33 +15,8 @@ namespace Coin\lib;
  */
 class Amount {
 
-    private $coins = [
-        [
-            'coin' => '1p',
-            'amount' => 1
-        ],
-        [
-            'coin' => '2p',
-            'amount' => 2
-        ],
-        [
-            'coin' => '20p',
-            'amount' => 20
-        ],
-        [
-            'coin' => '50p',
-            'amount' => 50
-        ],
-        [
-            'coin' => '£1',
-            'amount' => 100
-        ],
-        [
-            'coin' => '£2',
-            'amount' => 200
-        ]
-    ];
     private $currency;
+    private $coins;
 
     public function __construct($currency) {
         $this->currency = $currency;
@@ -49,8 +24,21 @@ class Amount {
 
     public function findCoinAmount($total) {
         $totalInPence = $this->currency->getTotalinDecimal($total);
-        
-        
+        $this->breakdown($totalInPence);
+        return $this->coins;
     }
+    
+    protected function breakdown($totalInPence) {
+        foreach ($this->currency->getCoins() as $coin) {
+            if ($totalInPence >= $coin['amount']) {
+                $this->coins[] = $coin['coin'];
+            } else {
+                
+            }
+        }
+    } 
+    
+    
+    
 
 }
