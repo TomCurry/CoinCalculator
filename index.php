@@ -14,7 +14,6 @@
     </body>
 </html>
 <?php
-var_dump($_POST);
 require "vendor/autoload.php";
 $currency = new Coin\lib\Currencies\GBP;
 $amount = new Coin\lib\Amount($currency);
@@ -27,8 +26,17 @@ if (isset($_POST['number'])) {
     $validation->nonNumericCharacter($value);
     
     if (!empty($validation->getErrors())){
-        var_dump($validation->getErrors());
+        echo "<ul>";
+            foreach ($validation->getErrors() as $error) {
+                echo "<li>$error</li>";
+            }
+        echo "</ul>";
     } else {
-        var_dump($amount->findCoinAmount($value));
+        echo "You are converting $value";
+        echo "<ul>";
+        foreach ($amount->findCoinAmount($value) as $coins) {
+            echo "<li>$coins</li>";
+        }
+        echo "</ul>";
     }
 }
