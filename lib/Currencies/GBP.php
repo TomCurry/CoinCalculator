@@ -53,7 +53,6 @@ class GBP implements CurrencyInterface {
     }
     
     public function getTotalinDecimal($total) {
-        var_dump(explode(".", $total));
         $stripped = str_replace([$this->majorSign, $this->minorSign], "", $total);
         
         if (strpos($total, $this->divider) !== false) {
