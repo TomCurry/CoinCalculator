@@ -22,16 +22,14 @@ class Amount {
     }
     
     protected function breakdown($totalInPence) {
-        foreach ($this->currency->getCoins() as $coin) {
-            if ($totalInPence >= $coin['amount']) {
-                $this->coins[] = $coin['coin'];
-            } else {
-                
+        do {
+            foreach ($this->currency->getCoins() as $coin) {
+                if ($totalInPence >= $coin['amount']) {
+                    $totalInPence -= $coin['amount'];
+                    $this->coins[] = $coin['coin'];
+                    break;
+                }
             }
-        }
+        } while ($totalInPence > 0);
     } 
-    
-    
-    
-
 }
