@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Coin Calculator</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/common.css">
     </head>
     <body>
         <h1>Coin Calculator</h1>
@@ -26,14 +27,14 @@ if (isset($_POST['number'])) {
     $validation->nonNumericCharacter($value);
     
     if (!empty($validation->getErrors())){
-        echo "<ul>";
+        echo "<ul class='error'>";
             foreach ($validation->getErrors() as $error) {
-                echo "<li>$error</li>";
+                echo "<li>&#x2717; $error</li>";
             }
         echo "</ul>";
     } else {
-        echo "You are converting $value";
-        echo "<ul>";
+        echo "<p>You are converting <b>$value</b></p>";
+        echo "<ul class='coin'>";
         foreach ($amount->findCoinAmount($value) as $coins) {
             echo "<li>$coins</li>";
         }

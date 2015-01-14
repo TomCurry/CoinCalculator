@@ -1,0 +1,37 @@
+/* 
+    Created on : 14-Jan-2015, 15:11:35
+    Author     : tom
+*/
+
+body, html, p {
+    font: 14px Verdana, sans-serif;
+}
+
+ul.error {
+    color: red;
+    border: 1px solid red;
+    padding: 5px 8px;
+    border-radius: 4px;
+    list-style-position: inside;
+    list-style-type: none;
+    background-color: #ffd8d8;
+}
+
+input[type=submit] {
+    padding: 5px 8px;
+    background-color: #51e041;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    border: 1px solid #42b733;
+    border-radius: 4px;
+}
+
+input[type=text] {
+    height: 27px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0px;
+}
+
+
