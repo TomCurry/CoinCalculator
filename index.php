@@ -35,8 +35,8 @@ if (isset($_POST['number'])) {
     } else {
         echo "<p>You are converting <b>$value</b></p>";
         echo "<ul class='coin'>";
-        foreach ($amount->findCoinAmount($value) as $coins) {
-            echo "<li>$coins</li>";
+        foreach ($amount->findCoinAmount($value) as $name => $coins) {
+            echo "<li>$name x " .  count($coins) . "</li>";
         }
         echo "</ul>";
     }

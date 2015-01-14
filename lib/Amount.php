@@ -26,7 +26,7 @@ class Amount {
             foreach ($this->currency->getCoins() as $coin) {
                 if ($totalInPence >= $coin['amount']) {
                     $totalInPence -= $coin['amount'];
-                    $this->coins[] = $coin['coin'];
+                    $this->coins[$coin['coin']][] = $coin;
                     break;
                 }
             }
