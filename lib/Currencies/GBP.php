@@ -45,11 +45,11 @@ class GBP implements CurrencyInterface {
             if ($a['amount'] == $b['amount']) {
                 return 0;
             } elseif ($a['amount'] < $b['amount']) {
-                return -1;
-            } else {
                 return 1;
+            } else {
+                return -1;
             }
-        });
+        }); 
     }
     
     public function getTotalinDecimal($total) {
