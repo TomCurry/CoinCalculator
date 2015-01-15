@@ -59,7 +59,13 @@ class GBP implements CurrencyInterface {
             $exploded = explode(".", $stripped);
             $pounds = $exploded[0];
             $pence = $exploded[1];
-        } else {
+        } 
+        elseif (strpos($total, $this->majorSign) !== false) {
+            $pounds = $stripped;
+            $pence = 0;
+        
+        } 
+        else {
             $pounds = 0;
             $pence = $stripped;
         }
