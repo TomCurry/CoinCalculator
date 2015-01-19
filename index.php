@@ -7,9 +7,9 @@
     </head>
     <body>
         <h1>Coin Calculator</h1>
-        <p></p>
+        <p>Please enter an amount of money. e.g. £1.54, 59p</p>
         <form action="" method='post'>
-            <input type='text' name='number'>
+            <input type='text' name='number' maxlength="10">
             <input type='submit' value="Calculate">
         </form>
     </body>
@@ -22,9 +22,11 @@ if (isset($_POST['number'])) {
     $value = $_POST['number'];
     
     $validation = new Coin\lib\Validation($currency);
-    $validation->numeric($value);
-    $validation->isEmpty($value);
-    $validation->nonNumericCharacter($value);
+    $input = $validation->cleanData($value);
+    $validation->numeric($input);
+    $validation->isEmpty($input);
+    $validation->nonNumericCharacter($input);
+    //$validation->inputMaxLength($input);
     
     if (!empty($validation->getErrors())){
         echo "<ul class='error'>";
@@ -33,9 +35,9 @@ if (isset($_POST['number'])) {
             }
         echo "</ul>";
     } else {
-        echo "<p>You are converting <b>$value</b></p>";
+        echo "<p>You are converting <b>$input</b></p>";
         echo "<ul class='coin'>";
-        foreach ($amount->findCoinAmount($value) as $name => $coins) {
+        foreach ($amount->findCoinAmount($input) as $name => $coins) {
             echo "<li>$name x " .  count($coins) . "</li>";
         }
         echo "</ul>";

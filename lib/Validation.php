@@ -20,9 +20,10 @@ class Validation
 
     public function isEmpty($empty) {
         //check if input is an empty string
-        if (!empty($empty)) {
+        if (!empty((float)$empty)) {
             return true;
         }
+        var_dump($empty);
         $this->addError("Please enter an amount of money!");
         return false;
     }
@@ -40,15 +41,43 @@ class Validation
     }
     
     public function numeric($digit) {
-        //check if a number has been entered
         $pattern = '/[%s%s]/i';
         $pattern = sprintf($pattern, $this->currency->getMajorSign(), $this->currency->getMinorSign());
         $data = preg_replace($pattern, "", $digit);
-        if (is_numeric($data)) {
-            return true;
+        if (is_numeric((float)$data)) {
+            if ($data > 10000) {
+                $this->addError("TOO BIG");    
+            } else {
+                return true;
+            }
+
         } 
         $this->addError("Please enter a numerical amount of money!");
         return false;
+    }
+    
+    /**
+     * 
+     * @deprecated since version 00001
+     */
+    public function inputMaxLength($length) {
+        $a = strlen($length);
+        var_dump($a);
+        var_dump($length);
+        if ($a > 11) {
+            $this->addError("Please enter a shorter value!");
+        }
+    }
+    
+    public function cleanData($sign) {
+        $pattern = '/[%s]+/i';
+        $pattern = sprintf($pattern, $this->currency->getMajorSign());
+        
+        if (strpos($sign, $this->currency->getMajorSign()) !== false) {
+            $data = preg_replace($pattern, $this->currency->getMajorSign(), $sign);
+            return $data;
+        }
+        return $sign;
     }
     
     protected function addError($message) {

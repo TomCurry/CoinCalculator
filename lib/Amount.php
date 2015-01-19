@@ -13,6 +13,7 @@ class Amount {
 
     public function __construct($currency) {
         $this->currency = $currency;
+        $this->coins = [];
     }
 
     public function findCoinAmount($total) {
