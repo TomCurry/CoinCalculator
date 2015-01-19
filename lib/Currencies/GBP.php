@@ -42,7 +42,6 @@ class GBP implements CurrencyInterface {
     
     public function __construct() {
         $this->sortArray($this->coins);
-        var_dump($this->coins);
     }
     
     public function getTotalinDecimal($total) {
@@ -63,7 +62,7 @@ class GBP implements CurrencyInterface {
         return $pounds * 100 + $pence;
     }
     
-    protected function sortArray(array $array) {
+    protected function sortArray() {
         usort($this->coins, function($a, $b){
             if ($a['amount'] == $b['amount']) {
                 return 0;
