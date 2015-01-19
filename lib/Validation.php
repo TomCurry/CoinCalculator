@@ -50,7 +50,6 @@ class Validation
             } else {
                 return true;
             }
-
         } 
         $this->addError("Please enter a numerical amount of money!");
         return false;

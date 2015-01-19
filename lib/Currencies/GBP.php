@@ -41,15 +41,7 @@ class GBP implements CurrencyInterface {
     ];
     
     public function __construct() {
-        usort($this->coins, function($a, $b){
-            if ($a['amount'] == $b['amount']) {
-                return 0;
-            } elseif ($a['amount'] < $b['amount']) {
-                return 1;
-            } else {
-                return -1;
-            }
-        }); 
+        $this->sortArray($this->coins);
         var_dump($this->coins);
     }
     
@@ -72,13 +64,15 @@ class GBP implements CurrencyInterface {
     }
     
     protected function sortArray(array $array) {
-        usort($array, function($a, $b){
-            if ($a['amount'] < $b['amount']) {
+        usort($this->coins, function($a, $b){
+            if ($a['amount'] == $b['amount']) {
+                return 0;
+            } elseif ($a['amount'] < $b['amount']) {
                 return 1;
             } else {
                 return -1;
             }
-        });
+        }); 
     }
     
     public function getMajorSign() {
