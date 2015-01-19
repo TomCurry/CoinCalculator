@@ -20,10 +20,10 @@ class Validation
 
     public function isEmpty($empty) {
         //check if input is an empty string
-        if (!empty((float)$empty)) {
+        if (!empty($empty)) {
             return true;
         }
-        var_dump($empty);
+        //var_dump($empty);
         $this->addError("Please enter an amount of money!");
         return false;
     }
@@ -44,7 +44,7 @@ class Validation
         $pattern = '/[%s%s]/i';
         $pattern = sprintf($pattern, $this->currency->getMajorSign(), $this->currency->getMinorSign());
         $data = preg_replace($pattern, "", $digit);
-        if (is_numeric((float)$data)) {
+        if (is_numeric($data)) {
             if ($data > 10000) {
                 $this->addError("TOO BIG");    
             } else {
