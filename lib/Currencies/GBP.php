@@ -50,6 +50,7 @@ class GBP implements CurrencyInterface {
                 return -1;
             }
         }); 
+        var_dump($this->coins);
     }
     
     public function getTotalinDecimal($total) {
@@ -68,6 +69,16 @@ class GBP implements CurrencyInterface {
         }
         
         return $pounds * 100 + $pence;
+    }
+    
+    protected function sortArray(array $array) {
+        usort($array, function($a, $b){
+            if ($a['amount'] < $b['amount']) {
+                return 1;
+            } else {
+                return -1;
+            }
+        });
     }
     
     public function getMajorSign() {
