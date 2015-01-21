@@ -73,8 +73,14 @@ class Validation
         $pattern = sprintf($pattern, $this->currency->getMajorSign());
         
         if (strpos($sign, $this->currency->getMajorSign()) !== false) {
-            $data = preg_replace($pattern, $this->currency->getMajorSign(), $sign);
-            return $data;
+            $sign = preg_replace($pattern, $this->currency->getMajorSign(), $sign);
+        } 
+        
+        $pattern = '/[%s]+/i';
+        $pattern = sprintf($pattern, $this->currency->getMinorSign());
+        
+        if (strpos($sign, $this->currency->getMinorSign()) !== false) {
+            $sign = preg_replace($pattern, $this->currency->getMinorSign(), $sign);
         }
         return $sign;
     }
