@@ -83,8 +83,8 @@ class Validation
             $sign = preg_replace($pattern, $this->currency->getMinorSign(), $sign);
         }
         return $sign;
-    }
-    
+    } 
+   
     protected function addError($message) {
         $this->validationErrors[] = $message;
     }

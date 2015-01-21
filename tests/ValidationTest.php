@@ -57,7 +57,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase {
         ];
     }
     
-    public function providerNumerics() {
+    public function providerNoNumerics() {
                 return [
             ['4', true],
             ['85', true],
@@ -78,6 +78,40 @@ class ValidationTest extends \PHPUnit_Framework_TestCase {
         ];
     }
     
+    public function providerNumerics() {
+                return [
+            ['4', true],
+            ['85', true],
+            ['197p', true],
+            ['2p', true],
+            ['1.87', true],
+            ['£1.23', true],
+            ['£2', true],
+            ['£10', true],
+            ['£1.87p', true],
+            ['£1p', true],
+            ['£1.p', true],
+            ['10000', true],
+            ['10001', false],
+            ['0.0.0.0', false],
+            ['£p', false],
+            ['', false]
+        ];
+    }
+    
+    public function providerCleanData() {
+        return[
+            ['£1.89p', '£1.89p'],
+            ['££1.23', '£1.23'],
+            ['£5', '£5'],
+            ['££4', '£4'],
+            ['99p', '99p'],
+            ['5', '5'],
+            ['53ppp', '53p'],
+            ['5PPP', '5p']
+        ];
+    }
+    
     /**
      * @param string $value
      * @param boolean $expected
@@ -89,13 +123,39 @@ class ValidationTest extends \PHPUnit_Framework_TestCase {
     }
     
     /**
-     * 
      * @param string $value
      * @param boolean $expected
-     * @dataProvider providerNumerics
+     * @dataProvider providerNoNumerics
      */
     public function testToCheckIfNoNumerics($value, $expected) {
         $result = $this->validation->nonNumericCharacter($value);
         $this->assertEquals($expected, $result);
+    }
+    
+    /**
+     * @param string $value
+     * @param boolean $expected
+     * @dataProvider providerNumerics
+     */
+    public function testNumericData($value, $expected) {
+        $result = $this->validation->numeric($value);
+        $this->assertEquals($expected, $result);
+    }
+    
+    /**
+     * @param string $value
+     * @param string $expected
+     * @dataProvider providerCleanData
+     */
+    public function testCleaningData($value, $expected) {
+        $result = $this->validation->cleanData($value);
+        $this->assertEquals($expected, $result);
+    }
+    
+    public function testGettingErrors() {
+        $result = $this->validation->getErrors();
+        $this->assertInternalType('array', $result);
+        $count = count($result);
+        $this->assert(0, $count);
     }
 }
