@@ -27,29 +27,6 @@ class ValidationTest extends \PHPUnit_Framework_TestCase {
         unset($this->validation);
     }
     
-    public function providerValidationInput() {
-        return [
-            ['4', true],
-            ['85', true],
-            ['197p', true],
-            ['2p', true],
-            ['1.87', true],
-            ['£1.23', true],
-            ['£2', true],
-            ['£10', true],
-            ['£1.87p', true],
-            ['£1p', true],
-            ['£1.p', true],
-            ['001.41p', true],
-            ['4.235p', true],
-            ['£1.257422457p', true],
-            ['', false],
-            ['1x', false],
-            ['£1x.0p', false],
-            ['£p', false]
-        ];
-    }
-    
     public function providerEmpty() {
         return [
             ['', false],
@@ -58,7 +35,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase {
     }
     
     public function providerNoNumerics() {
-                return [
+        return [
             ['4', true],
             ['85', true],
             ['197p', true],
@@ -75,11 +52,13 @@ class ValidationTest extends \PHPUnit_Framework_TestCase {
             ['£1.257422457p', true],
             ['1x', false],
             ['£1x.0p', false],
+            ['0.00001', true],
+            ['££5££', true]
         ];
     }
     
     public function providerNumerics() {
-                return [
+        return [
             ['4', true],
             ['85', true],
             ['197p', true],
@@ -95,7 +74,9 @@ class ValidationTest extends \PHPUnit_Framework_TestCase {
             ['10001', false],
             ['0.0.0.0', false],
             ['£p', false],
-            ['', false]
+            ['', false],
+            ['0.00001', true],
+            ['££5££', true]
         ];
     }
     
@@ -108,7 +89,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase {
             ['99p', '99p'],
             ['5', '5'],
             ['53ppp', '53p'],
-            ['5PPP', '5p']
+            ['5PPP', '5p'],
         ];
     }
     
@@ -156,6 +137,6 @@ class ValidationTest extends \PHPUnit_Framework_TestCase {
         $result = $this->validation->getErrors();
         $this->assertInternalType('array', $result);
         $count = count($result);
-        $this->assert(0, $count);
+        $this->assertEquals(0, $count);
     }
 }
