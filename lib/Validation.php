@@ -69,12 +69,18 @@ class Validation
     }
     
     public function cleanData($sign) {
+        $pattern = '/[%s]+/i';
+        $pattern = sprintf($pattern, $this->currency->getMajorSign());
+        
         if (strpos($sign, $this->currency->getMajorSign()) !== false) {
-            $sign = str_ireplace($this->currency->getMajorSign(), $this->currency->getMajorSign(), $sign);
+            $sign = preg_replace($pattern, $this->currency->getMajorSign(), $sign);
         } 
-        var_dump($sign);
-        if (strpos($sign, $this->currency->getMinorSign()) !== false) {
-            $sign = str_ireplace($this->currency->getMinorSign(), $this->currency->getMinorSign(), $sign);
+        
+        $pattern = '/[%s]+/i';
+        $pattern = sprintf($pattern, $this->currency->getMinorSign());
+        
+        if (stripos($sign, $this->currency->getMinorSign()) !== false) {
+            $sign = preg_replace($pattern, $this->currency->getMinorSign(), $sign);
         }
         return $sign;
     }
