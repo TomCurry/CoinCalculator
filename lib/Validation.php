@@ -46,7 +46,7 @@ class Validation
         $data = preg_replace($pattern, "", $digit);
         if (is_numeric($data)) {
             if ($data > 10000) {
-                $this->addError("TOO BIG");    
+                $this->addError("Please enter a smaller amount.");    
             } else {
                 return true;
             }
